@@ -56,6 +56,11 @@ ul {
     transition: background-color 0.2s ease;
 }
 
+.card-small {
+    max-width: 520px;
+    margin-top: 20px;
+}
+
 .btn:hover {
     background-color: var(--primary-hover);
 }

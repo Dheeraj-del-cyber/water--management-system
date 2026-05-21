@@ -37,6 +37,12 @@ async function logout() {
     }
 }
 
+function buildNavLink(url, label, isButton = false) {
+    const active = window.location.pathname === url ? 'active' : '';
+    const baseClass = isButton ? 'btn' : '';
+    return `<a href="${url}" class="${baseClass} ${active}">${label}</a>`;
+}
+
 // Update UI based on auth state
 async function updateNavbar() {
     const user = await checkAuth();
@@ -44,17 +50,17 @@ async function updateNavbar() {
     if (!navLinks) return;
 
     if (user) {
-        let dashboardLink = user.role === 'admin' ? '/admin.html' : '/dashboard.html';
+        const dashboardLink = user.role === 'admin' ? '/admin.html' : '/dashboard.html';
         navLinks.innerHTML = `
-            <a href="${dashboardLink}">Dashboard</a>
-            <a href="/leaderboard.html">Leaderboard</a>
-            <a href="/profile.html">Profile</a>
+            ${buildNavLink(dashboardLink, 'Dashboard')}
+            ${buildNavLink('/leaderboard.html', 'Leaderboard')}
+            ${buildNavLink('/profile.html', 'Profile')}
             <a href="#" onclick="logout(); return false;">Logout</a>
         `;
     } else {
         navLinks.innerHTML = `
-            <a href="/login.html" class="btn btn-outline">Login</a>
-            <a href="/signup.html" class="btn">Sign Up</a>
+            ${buildNavLink('/login.html', 'Login', true)}
+            ${buildNavLink('/signup.html', 'Sign Up', true)}
         `;
     }
 }
