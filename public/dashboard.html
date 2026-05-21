@@ -24,26 +24,30 @@
             </ul>
         </div>
         <div class="main-content">
-            <h2>Welcome back! Room <span id="roomNum"></span></h2>
-            <p style="margin-bottom: 20px; color: var(--text-muted);">Here is your water usage overview.</p>
-            
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Welcome back, Room <span id="roomNum"></span></h1>
+                    <p class="page-note">Here is your water usage overview.</p>
+                </div>
+            </div>
+
             <div class="stats-grid">
                 <div class="card stat-card">
-                    <div class="stat-title">Used Today (Litres)</div>
+                    <div class="stat-title">Used Today</div>
                     <div class="stat-value" id="todayUsed">0</div>
                 </div>
                 <div class="card stat-card">
-                    <div class="stat-title">Total Used (Litres)</div>
+                    <div class="stat-title">Total Used</div>
                     <div class="stat-value" id="totalUsed">0</div>
                 </div>
-                <div class="card stat-card" style="border-left: 4px solid var(--success);">
+                <div class="card stat-card">
                     <div class="stat-title">Eco Points</div>
                     <div class="stat-value" id="ecoPoints">0</div>
                 </div>
             </div>
 
             <div class="card">
-                <h3>Recent Usage History</h3>
+                <h2 class="section-heading">Recent Usage History</h2>
                 <div class="table-responsive">
                     <table id="historyTable">
                         <thead>

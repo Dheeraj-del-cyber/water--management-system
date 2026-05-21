@@ -11,40 +11,41 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">AquaSmart</div>
-            <div class="nav-links" id="nav-links">
-                <!-- Injected via JS -->
-            </div>
+            <div class="nav-links" id="nav-links"></div>
         </div>
     </nav>
 
     <header class="hero">
         <div class="container">
             <h1>Smart Hostel Water Monitoring</h1>
-            <p>Real-time water usage tracking and gamified conservation for modern hostels.</p>
-            <a href="/signup.html" class="btn" style="font-size: 18px; padding: 15px 30px;">Get Started</a>
+            <p class="section-text">Track water usage in real time, support hostel water conservation, and view activity with a clean, easy dashboard.</p>
+            <div class="hero-actions">
+                <a href="/signup.html" class="btn">Get Started</a>
+                <a href="/login.html" class="btn btn-outline">Login</a>
+            </div>
         </div>
     </header>
 
-    <section class="container" style="padding: 60px 20px;">
-        <h2 style="text-align: center; margin-bottom: 40px;">Features</h2>
-        <div class="stats-grid">
-            <div class="card stat-card">
+    <section class="container page-section">
+        <h2 class="section-heading text-center">Features</h2>
+        <div class="stats-grid features-grid">
+            <div class="card feature-card">
                 <h3>Real-time Tracking</h3>
-                <p style="color: var(--text-muted); margin-top: 10px;">Monitor your water usage instantly with ESP32 sensors.</p>
+                <p class="section-text">Monitor water usage instantly from the ESP32 sensor feed.</p>
             </div>
-            <div class="card stat-card">
-                <h3>Gamification</h3>
-                <p style="color: var(--text-muted); margin-top: 10px;">Earn Eco Points for saving water and compete on the leaderboard.</p>
+            <div class="card feature-card">
+                <h3>Simple Dashboard</h3>
+                <p class="section-text">View usage history and eco points in a straightforward dashboard.</p>
             </div>
-            <div class="card stat-card">
-                <h3>Admin Analytics</h3>
-                <p style="color: var(--text-muted); margin-top: 10px;">Comprehensive dashboard for hostel management.</p>
+            <div class="card feature-card">
+                <h3>Leaderboard</h3>
+                <p class="section-text">Compare savings across rooms and encourage water-friendly behavior.</p>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2026 AquaSmart Management System. Built for a better tomorrow.</p>
+    <footer class="footer-simple">
+        <p>&copy; 2026 AquaSmart Management System.</p>
     </footer>
 
     <script src="/js/main.js"></script>

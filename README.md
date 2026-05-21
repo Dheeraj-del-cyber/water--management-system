@@ -26,6 +26,8 @@ Create a `.env` file at the project root with:
 
 ```
 MONGODB_URI=<your-mongodb-connection-string>
+# or use MONGO_URI if your environment variable is named that
+MONGO_URI=<your-mongodb-connection-string>
 PORT=3000
 ```
 

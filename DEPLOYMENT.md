@@ -9,6 +9,8 @@ Create a `.env` file in the root directory and add the following:
 ```
 PORT=3000
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/smartwater
+# or use MONGO_URI instead if that is your environment name
+MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/smartwater
 JWT_SECRET=your_super_secret_key_here
 ```
 

@@ -24,28 +24,32 @@
             </ul>
         </div>
         <div class="main-content">
-            <h2>Admin Overview</h2>
-            <p style="margin-bottom: 20px; color: var(--text-muted);">Hostel-wide water consumption stats.</p>
-            
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Admin Overview</h1>
+                    <p class="page-note">Hostel-wide water consumption stats in one clean view.</p>
+                </div>
+            </div>
+
             <div class="stats-grid">
                 <div class="card stat-card">
                     <div class="stat-title">Total Users</div>
                     <div class="stat-value" id="totalUsers">0</div>
                 </div>
                 <div class="card stat-card">
-                    <div class="stat-title">Total Hostel Consumption (L)</div>
+                    <div class="stat-title">Total Consumption</div>
                     <div class="stat-value" id="totalConsumption">0</div>
                 </div>
             </div>
 
             <div class="card">
-                <h3>All Users</h3>
+                <h2 class="section-heading">All Users</h2>
                 <div class="table-responsive">
                     <table id="usersTable">
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Room Number</th>
+                                <th>Room</th>
                                 <th>Email</th>
                                 <th>Eco Points</th>
                             </tr>
