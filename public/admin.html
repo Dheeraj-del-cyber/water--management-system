@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - AquaSmart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">AquaSmart Admin</a>
+            <div class="nav-links" id="nav-links"></div>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout">
+        <div class="sidebar">
+            <ul>
+                <li><a href="/admin.html" class="active">Overview</a></li>
+                <li><a href="#">Manage Users</a></li>
+                <li><a href="#">Devices Status</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <h2>Admin Overview</h2>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Hostel-wide water consumption stats.</p>
+            
+            <div class="stats-grid">
+                <div class="card stat-card">
+                    <div class="stat-title">Total Users</div>
+                    <div class="stat-value" id="totalUsers">0</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-title">Total Hostel Consumption (L)</div>
+                    <div class="stat-value" id="totalConsumption">0</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>All Users</h3>
+                <div class="table-responsive">
+                    <table id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Room Number</th>
+                                <th>Email</th>
+                                <th>Eco Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const user = await checkAuth();
+            if(!user || user.role !== 'admin') {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            try {
+                const data = await apiCall('/api/admin/stats');
+                document.getElementById('totalUsers').textContent = data.usersCount;
+                document.getElementById('totalConsumption').textContent = data.totalConsumption;
+
+                const tbody = document.querySelector('#usersTable tbody');
+                tbody.innerHTML = data.users.map(u => `
+                    <tr>
+                        <td>${u.fullName}</td>
+                        <td>${u.roomNumber}</td>
+                        <td>${u.email}</td>
+                        <td>${u.ecoPoints}</td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AquaSmart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">AquaSmart</a>
+            <div class="nav-links" id="nav-links"></div>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout">
+        <div class="sidebar">
+            <ul>
+                <li><a href="/dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="/leaderboard.html">Leaderboard</a></li>
+                <li><a href="/profile.html">Profile</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <h2>Welcome back! Room <span id="roomNum"></span></h2>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Here is your water usage overview.</p>
+            
+            <div class="stats-grid">
+                <div class="card stat-card">
+                    <div class="stat-title">Used Today (Litres)</div>
+                    <div class="stat-value" id="todayUsed">0</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-title">Total Used (Litres)</div>
+                    <div class="stat-value" id="totalUsed">0</div>
+                </div>
+                <div class="card stat-card" style="border-left: 4px solid var(--success);">
+                    <div class="stat-title">Eco Points</div>
+                    <div class="stat-value" id="ecoPoints">0</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Recent Usage History</h3>
+                <div class="table-responsive">
+                    <table id="historyTable">
+                        <thead>
+                            <tr>
+                                <th>Date & Time</th>
+                                <th>Amount (Litres)</th>
+                                <th>Flow Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const user = await checkAuth();
+            if(!user) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            try {
+                const data = await apiCall('/api/dashboard');
+                document.getElementById('roomNum').textContent = data.roomNumber;
+                document.getElementById('todayUsed').textContent = data.todayUsed;
+                document.getElementById('totalUsed').textContent = data.totalUsed;
+                document.getElementById('ecoPoints').textContent = data.ecoPoints;
+
+                const tbody = document.querySelector('#historyTable tbody');
+                tbody.innerHTML = data.history.map(log => `
+                    <tr>
+                        <td>${new Date(log.timestamp).toLocaleString()}</td>
+                        <td>${log.amountLitres}</td>
+                        <td>${log.flowRate} L/min</td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>

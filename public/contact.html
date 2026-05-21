@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - AquaSmart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">AquaSmart</a>
+            <div class="nav-links" id="nav-links"></div>
+        </div>
+    </nav>
+
+    <div class="container" style="padding: 40px 20px;">
+        <div class="card auth-container">
+            <h2 class="auth-title">Contact Admin</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text" id="subject" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea id="message" rows="5" style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px;" required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Your message has been sent to the admin. Thank you!');
+            document.getElementById('contactForm').reset();
+        });
+    </script>
+</body>
+</html>

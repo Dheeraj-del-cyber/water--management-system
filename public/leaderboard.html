@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - AquaSmart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">AquaSmart</a>
+            <div class="nav-links" id="nav-links"></div>
+        </div>
+    </nav>
+
+    <div class="container" style="padding: 40px 20px;">
+        <h2 style="text-align: center; margin-bottom: 30px;">Conservation Leaderboard</h2>
+        <div class="card" style="max-width: 800px; margin: 0 auto;">
+            <div class="table-responsive">
+                <table id="leaderboardTable">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Room Number</th>
+                            <th>Eco Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const users = await apiCall('/api/leaderboard');
+                const tbody = document.querySelector('#leaderboardTable tbody');
+                tbody.innerHTML = users.map((u, index) => `
+                    <tr>
+                        <td><strong>#${index + 1}</strong></td>
+                        <td>${u.fullName}</td>
+                        <td>${u.roomNumber}</td>
+                        <td style="color: var(--success); font-weight: bold;">${u.ecoPoints}</td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>

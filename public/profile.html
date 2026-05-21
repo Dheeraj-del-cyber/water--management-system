@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - AquaSmart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">AquaSmart</a>
+            <div class="nav-links" id="nav-links"></div>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout">
+        <div class="sidebar">
+            <ul>
+                <li><a href="/dashboard.html">Dashboard</a></li>
+                <li><a href="/leaderboard.html">Leaderboard</a></li>
+                <li><a href="/profile.html" class="active">Profile</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <h2>Your Profile</h2>
+            <div class="card" style="max-width: 500px; margin-top: 20px;">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="profileName" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" id="profileEmail" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Room Number</label>
+                    <input type="text" id="profileRoom" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <input type="text" id="profileRole" disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const user = await checkAuth();
+            if(!user) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            document.getElementById('profileName').value = user.fullName;
+            document.getElementById('profileEmail').value = user.email;
+            document.getElementById('profileRoom').value = user.roomNumber;
+            document.getElementById('profileRole').value = user.role;
+        });
+    </script>
+</body>
+</html>
