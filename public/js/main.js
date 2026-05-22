@@ -65,6 +65,53 @@ async function updateNavbar() {
     }
 }
 
+function easeOutQuad(t) {
+    return t * (2 - t);
+}
+
+function animateValue(element, start, end, duration = 900) {
+    if (!element) return;
+    const range = end - start;
+    const startTime = performance.now();
+
+    function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const value = Math.floor(start + range * easeOutQuad(progress));
+        element.textContent = value.toLocaleString();
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        }
+    }
+
+    requestAnimationFrame(update);
+}
+
+function updateDashboardProgress(points) {
+    const level = Math.max(1, Math.floor(points / 100) + 1);
+    const currentLevelPoints = points % 100;
+    const progressFill = document.getElementById('progressFill');
+    const progressLabel = document.getElementById('progressLabel');
+    const levelElement = document.getElementById('ecoLevel');
+
+    if (levelElement) {
+        levelElement.textContent = level;
+    }
+    if (progressLabel) {
+        progressLabel.textContent = `${currentLevelPoints} / 100 points`;
+    }
+    if (progressFill) {
+        progressFill.style.width = `${Math.min(100, currentLevelPoints)}%`;
+    }
+}
+
+function animateDashboardStats(data) {
+    animateValue(document.getElementById('todayUsed'), 0, data.todayUsed);
+    animateValue(document.getElementById('totalUsed'), 0, data.totalUsed);
+    animateValue(document.getElementById('ecoPoints'), 0, data.ecoPoints);
+    updateDashboardProgress(data.ecoPoints);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     updateNavbar();
 });

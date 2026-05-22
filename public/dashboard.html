@@ -31,6 +31,19 @@
                 </div>
             </div>
 
+            <div class="card progress-card">
+                <div class="progress-header">
+                    <div>
+                        <p class="stat-title">Water Warrior Level</p>
+                        <h2 class="progress-title">Level <span id="ecoLevel">1</span></h2>
+                    </div>
+                    <div class="progress-label" id="progressLabel">0 / 100 points</div>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
             <div class="stats-grid">
                 <div class="card stat-card">
                     <div class="stat-title">Used Today</div>
@@ -78,9 +91,7 @@
             try {
                 const data = await apiCall('/api/dashboard');
                 document.getElementById('roomNum').textContent = data.roomNumber;
-                document.getElementById('todayUsed').textContent = data.todayUsed;
-                document.getElementById('totalUsed').textContent = data.totalUsed;
-                document.getElementById('ecoPoints').textContent = data.ecoPoints;
+                animateDashboardStats(data);
 
                 const tbody = document.querySelector('#historyTable tbody');
                 tbody.innerHTML = data.history.map(log => `
